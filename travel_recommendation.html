@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Travel King</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+        margin: 0;
+        padding: 0;
+        padding-top: 60px;
+      }
+
+      #results {
+        margin-top: 20px;
+        padding: 20px;
+      }
+
+      .navbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background: #333;
+        color: #fff;
+        padding: 10px 20px;
+        position: fixed;
+        width: 100%;
+        top: 0;
+        z-index: 1000;
+      }
+
+      .website-title h1 {
+        font-size: 2rem;
+        font-weight: bold;
+        color: #87ceeb;
+        margin: 0;
+      }
+
+      .links {
+        display: flex;
+        gap: 20px;
+      }
+
+      .navbar a {
+        text-decoration: none;
+        color: #fff;
+      }
+
+      .navbar a:hover {
+        color: #ffd700;
+      }
+
+      .search-container {
+        display: flex;
+        gap: 10px;
+      }
+
+      .navbar input[type="text"] {
+        padding: 5px;
+        border: none;
+        border-radius: 4px;
+      }
+
+      .navbar button {
+        padding: 5px 10px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+
+      .navbar button:hover {
+        background: #555;
+        color: #fff;
+      }
+
+      .section {
+        padding: 100px 20px;
+        margin-top: 60px;
+      }
+      .home {
+        background-image: url("travelpic.webp");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        padding: 100px 20px;
+        margin-top: 60px;
+        color: #fff;
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 80vh;
+      }
+
+      .text-block {
+        background-color: rgba(0, 0, 0, 0.6);
+        padding: 40px;
+        border-radius: 10px;
+        max-width: 800px;
+        text-align: left;
+        margin: 0 auto;
+        color: #fff;
+      }
+
+      .team-member {
+        margin-bottom: 30px;
+        padding: 15px;
+        border: 1px solid #fff;
+        border-radius: 5px;
+      }
+
+      .team-member h2 {
+        font-size: 1.5rem;
+        margin-bottom: 10px;
+      }
+
+      .team-member p {
+        font-size: 1rem;
+      }
+
+      strong {
+        font-weight: bold;
+        color: #ffd700;
+      }
+
+      .about,
+      .contact {
+        padding: 40px 20px;
+        text-align: center;
+      }
+
+      .about {
+        background-image: url("aboutus.avif");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        padding: 100px 20px;
+        margin-top: 60px;
+        color: #fff;
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 80vh;
+      }
+
+      .contact {
+        background-image: url("contact-us.jpg");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        padding: 100px 20px;
+        color: #fff;
+        text-align: center;
+        position: relative;
+      }
+
+      .contact .text-block {
+        background: rgba(0, 0, 0, 0.6);
+        padding: 40px;
+        border-radius: 8px;
+        max-width: 800px;
+        margin: 0 auto;
+      }
+
+      .contact h1,
+      .contact p {
+        margin: 20px 0;
+      }
+
+      .contact form {
+        margin-top: 20px;
+        padding: 20px;
+        background: rgba(0, 0, 0, 0.6);
+        border-radius: 8px;
+        position: relative;
+        z-index: 1;
+      }
+
+      .contact .form-group {
+        margin-bottom: 15px;
+      }
+
+      .contact label {
+        display: block;
+        font-weight: bold;
+        margin-bottom: 5px;
+      }
+
+      .contact input,
+      .contact textarea {
+        width: 100%;
+        padding: 10px;
+        font-size: 16px;
+        border-radius: 4px;
+        border: 1px solid #ccc;
+      }
+
+      .contact button {
+        padding: 10px 20px;
+        background-color: #4caf50;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+
+      .contact button:hover {
+        background-color: #45a049;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navigation Bar -->
+    <div class="navbar">
+      <div class="website-title">
+        <h1>Travel King</h1>
+      </div>
+
+      <!-- Navigation Links -->
+      <div class="links">
+        <a href="#home">Home</a>
+        <a href="#about">About Us</a>
+        <a href="#contact">Contact Us</a>
+      </div>
+      <div class="search-container">
+        <input type="text" id="search" placeholder="Search..." />
+        <button onclick="searchData()">Search</button>
+        <button onclick="resetSearch()">Reset</button>
+        <button id="clearButton">Clear</button>
+      </div>
+    </div>
+
+    <div id="results"></div>
+
+    <!-- Home Section -->
+    <div id="home" class="section home">
+      <div class="text-block">
+        <h1>Find Your Dream Destination</h1>
+        <p>
+          Your ultimate destination for personalized travel recommendations!
+          Whether you’re seeking hidden gems, top-rated tourist attractions, or
+          tailored experiences based on your preferences, Travel King makes
+          planning your dream journey effortless. Explore the world with
+          confidence as we connect you to incredible places and create
+          unforgettable memories.
+        </p>
+      </div>
+    </div>
+
+    <!-- About Us Section -->
+    <div id="about" class="section about">
+      <div class="text-block">
+        <h1>About Us</h1>
+        <p>Meet Our Team</p>
+        <div class="team-member">
+          <h2>Jacob Rivers</h2>
+          <p>
+            <strong>Founder & Visionary</strong><br />Jacob brings a lifelong
+            passion for travel and innovation, leading our mission to redefine
+            the way people discover destinations.
+          </p>
+        </div>
+        <div class="team-member">
+          <h2>Sophia Bennett</h2>
+          <p>
+            <strong>Lead Travel Curator</strong><br />With a knack for finding
+            hidden gems, Sophia crafts personalized recommendations and ensures
+            our content is rich with unique experiences.
+          </p>
+        </div>
+        <div class="team-member">
+          <h2>Ethan Taylor</h2>
+          <p>
+            <strong>Head of Technology</strong><br />Ethan designs and optimizes
+            the technical magic behind our platform, ensuring a smooth and
+            intuitive user experience.
+          </p>
+        </div>
+        <div class="team-member">
+          <h2>Mia Carter</h2>
+          <p>
+            <strong>Marketing Strategist</strong><br />Mia connects Travel King
+            to the world, spreading our vision through creative campaigns and
+            engaging with our community.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Contact Us Section -->
+    <div id="contact" class="section contact">
+      <div class="text-block">
+        <h1>Contact Us</h1>
+        <p>Feel free to reach out! We would love to hear from you.</p>
+
+        <!-- Contact Form -->
+        <form action="#" method="POST">
+          <div class="form-group">
+            <label for="name">Your Name:</label>
+            <input
+              type="text"
+              id="name"
+              name="name"
+              placeholder="Enter your name"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="email">Your Email:</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              placeholder="Enter your email"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="message">Your Message:</label>
+            <textarea
+              id="message"
+              name="message"
+              rows="4"
+              placeholder="Write your message here"
+              required
+            ></textarea>
+          </div>
+
+          <button type="submit">Submit</button>
+        </form>
+      </div>
+    </div>
+
+    <script src="travel_recommendation.js"></script>
+  </body>
+</html>
